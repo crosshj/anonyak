@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>anonyak: anonymous chat</title>
+		<meta name="description" content="servie worker tools">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="mobile-web-app-capable" content="yes">
+		<link rel="stylesheet" href="index.css">
+		<meta name="color-scheme" content="dark">
+	</head>
+
+	<style>
+		html { font-size: calc(0.75em + .25vw); }
+		body,button,pre { font-family: sans-serif; }
+		body { color: #ccc; margin: 3em;}
+		pre.error { color: #f37; }
+	</style>
+
+	<body>
+		<h3>host</h3>
+	</body>
+
+	<script type="module">
+		const pre = (className='', x) => `<pre class="${className}">${x}</pre>`
+		try {
+			const apiUrl = 'https://n02d8geryb.execute-api.us-east-1.amazonaws.com/dev/';
+			const { message, event, context } = await fetch(apiUrl).then(x => x.json());
+			console.log({ event, context });
+			document.body.innerHTML += pre('', message);
+		} catch(e){
+			document.body.innerHTML += pre('error',
+				e.message + '\n' + e.stack
+			);
+		}
+	</script>
+
+</html>
+
