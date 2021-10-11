@@ -23,7 +23,7 @@
 	<script type="module">
 		const pre = (className='', x) => `<pre class="${className}">${x}</pre>`
 		try {
-			const apiUrl = 'https://n02d8geryb.execute-api.us-east-1.amazonaws.com/dev/';
+			const apiUrl = 'https://n02d8geryb.execute-api.us-east-1.amazonaws.com/dev/host/';
 			const { message, event, context } = await fetch(apiUrl).then(x => x.json());
 			console.log({ event, context });
 			document.body.innerHTML += pre('', message);

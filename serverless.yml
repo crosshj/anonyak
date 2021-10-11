@@ -11,3 +11,15 @@ functions:
      - http:
          path: /
          method: get
+  host:
+    handler: handlers/host.get
+    events:
+     - http:
+         path: /host
+         method: get
+  client:
+    handler: handlers/client.post
+    events:
+     - http:
+         path: /client
+         method: post

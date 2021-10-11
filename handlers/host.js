@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports.world = (event, context, callback) => {
+module.exports.get = (event, context, callback) => {
 	const allowed = [
 		"https://fiug.dev",
 		"https://beta.fiug.dev",
@@ -17,7 +17,7 @@ module.exports.world = (event, context, callback) => {
 			"Access-Control-Allow-Methods": "OPTIONS,POST,GET"
 		},
 		body: JSON.stringify({
-			message: 'hello anonyak!',
+			message: 'hello anonyak: host!',
 			event,
 			context,
 		}),

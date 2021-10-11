@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports.world = (event, context, callback) => {
+module.exports.post = (event, context, callback) => {
 	const allowed = [
 		"https://fiug.dev",
 		"https://beta.fiug.dev",
