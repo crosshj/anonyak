@@ -1,13 +1,24 @@
 'use strict';
+const { Dynamo } = require('../repo/dynamo.js');
+const db = new Dynamo();
 
-module.exports.post = (event, context, callback) => {
+module.exports.post = async (event, context, callback) => {
 	const allowed = [
 		"https://fiug.dev",
 		"https://beta.fiug.dev",
 		"https://crosshj.com",
 	];
+	const { message } = event.body || {};
 	const { origin } = event.headers;
 	const AllowOrigin = allowed.includes(origin) ? origin : '';
+
+	let dbResponse = {};
+	try {
+		dbResponse = await db.put(message);
+	} catch(e){
+		console.log(e);
+		debResponse.error = 'failed to post message';
+	}
 
 	const response = {
 		statusCode: 200,
@@ -17,7 +28,7 @@ module.exports.post = (event, context, callback) => {
 			"Access-Control-Allow-Methods": "OPTIONS,POST"
 		},
 		body: JSON.stringify({
-			message: 'hello anonyak: client!',
+			...dbResponse,
 			event,
 			context,
 		}),

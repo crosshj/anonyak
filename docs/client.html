@@ -26,8 +26,14 @@
 		const pre = (className='', x) => `<pre class="${className}">${x}</pre>`
 		try {
 			const apiUrl = 'https://n02d8geryb.execute-api.us-east-1.amazonaws.com/dev/client/';
-			const opts = { method: 'post' };
-			const { message, event, context } = await fetch(apiUrl, opts).then(x => x.json());
+			const opts = {
+				method: 'post',
+				body: JSON.stringify({
+					message: `${Math.floor(Date.now() / 1000)} - client msg`
+				})
+			};
+			const { message, error, event, context } = await fetch(apiUrl, opts).then(x => x.json());
+			if(error) throw new Error(error);
 			console.log({ event, context });
 			document.body.innerHTML += pre('', message);
 		} catch(e){

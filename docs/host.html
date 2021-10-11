@@ -24,9 +24,10 @@
 		const pre = (className='', x) => `<pre class="${className}">${x}</pre>`
 		try {
 			const apiUrl = 'https://n02d8geryb.execute-api.us-east-1.amazonaws.com/dev/host/';
-			const { message, event, context } = await fetch(apiUrl).then(x => x.json());
+			const { items, error, event, context } = await fetch(apiUrl).then(x => x.json());
+			if(error) throw new Error(error);
 			console.log({ event, context });
-			document.body.innerHTML += pre('', message);
+			document.body.innerHTML += pre('', items);
 		} catch(e){
 			document.body.innerHTML += pre('error',
 				e.message + '\n' + e.stack

@@ -1,4 +1,6 @@
 'use strict';
+const { Dynamo } = require('../repo/dynamo.js');
+const db = new Dynamo();
 
 module.exports.get = (event, context, callback) => {
 	const allowed = [
@@ -9,6 +11,14 @@ module.exports.get = (event, context, callback) => {
 	const { origin } = event.headers;
 	const AllowOrigin = allowed.includes(origin) ? origin : '';
 
+	let dbResponse = {};
+	try {
+		dbResponse = await db.scan();
+	} catch(e){
+		console.log(e);
+		debResponse.error = 'failed to list messages';
+	}
+
 	const response = {
 		statusCode: 200,
 		headers: {
@@ -17,7 +27,7 @@ module.exports.get = (event, context, callback) => {
 			"Access-Control-Allow-Methods": "OPTIONS,GET"
 		},
 		body: JSON.stringify({
-			message: 'hello anonyak: host!',
+			...dbResponse,
 			event,
 			context,
 		}),

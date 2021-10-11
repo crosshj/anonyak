@@ -1,8 +1,26 @@
 service: anonyak
 
+custom:
+  tableName: 'chats-table-${sls:stage}'
+  dbTTLHours: 2
+
 provider:
   name: aws
   runtime: nodejs14.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource:
+        - Fn::GetAtt: [ ChatsTable, Arn ]
+  environment:
+    CHATS_TABLE: ${self:custom.tableName}
+    DB_TTL_HRS: ${self.custom.dbTTLHours}
 
 functions:
   hello:
@@ -23,3 +41,20 @@ functions:
      - http:
          path: /client
          method: post
+
+resources:
+  Resources:
+    ChatsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        TimeToLiveSpecification:
+          AttributeName: ttl
+          Enabled: true
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.tableName}
