@@ -2,11 +2,11 @@
 	"name": "anonyak",
 	"version": "0.0.1",
 	"description": "anonymous chat for meetings",
-	"main": "handler.js",
+	"main": "",
 	"scripts": {
 		"build": "",
-		"watch": "browser-sync start --config .browsersync.js",
-		"test": "jest --watch"
+		"watch": "",
+		"test": ""
 	},
 	"author": "",
 	"license": "ISC",

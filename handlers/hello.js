@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports.hello = (event, context, callback) => {
+module.exports.world = (event, context, callback) => {
 	const allowed = [
 		"https://fiug.dev",
 		"https://beta.fiug.dev",
@@ -25,3 +25,4 @@ module.exports.hello = (event, context, callback) => {
 
 	callback(null, response);
 };
+
