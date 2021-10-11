@@ -14,7 +14,7 @@ module.exports.post = (event, context, callback) => {
 		headers: {
 			"Access-Control-Allow-Headers" : "Content-Type",
 			"Access-Control-Allow-Origin": AllowOrigin,
-			"Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+			"Access-Control-Allow-Methods": "OPTIONS,POST"
 		},
 		body: JSON.stringify({
 			message: 'hello anonyak: client!',
