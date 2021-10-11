@@ -2,7 +2,7 @@ service: anonyak
 
 provider:
   name: aws
-  runtime: nodejs14
+  runtime: nodejs14.x
 
 functions:
   hello:
