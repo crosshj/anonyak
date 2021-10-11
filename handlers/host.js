@@ -2,7 +2,7 @@
 const { Dynamo } = require('../repo/dynamo.js');
 const db = new Dynamo();
 
-module.exports.get = (event, context, callback) => {
+module.exports.get = async (event, context, callback) => {
 	const allowed = [
 		"https://fiug.dev",
 		"https://beta.fiug.dev",
@@ -16,7 +16,7 @@ module.exports.get = (event, context, callback) => {
 		dbResponse = await db.scan();
 	} catch(e){
 		console.log(e);
-		debResponse.error = 'failed to list messages';
+		dbResponse.error = 'failed to list messages';
 	}
 
 	const response = {

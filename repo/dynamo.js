@@ -1,7 +1,7 @@
 const AWS = require("aws-sdk");
 
 const CHATS_TABLE = process.env.CHATS_TABLE;
-const TIME_TO_LIVE = process.env.DB_TTL_HRS * 60 * 60;
+const TIME_TO_LIVE = Number(process.env.DB_TTL_HRS) * 60 * 60;
 
 module.exports.Dynamo = class Dynamo {
 	constructor(){

@@ -17,7 +17,7 @@ module.exports.post = async (event, context, callback) => {
 		dbResponse = await db.put(message);
 	} catch(e){
 		console.log(e);
-		debResponse.error = 'failed to post message';
+		dbResponse.error = 'failed to post message';
 	}
 
 	const response = {
