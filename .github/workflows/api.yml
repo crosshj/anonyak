@@ -5,9 +5,9 @@ on:
     branches:
       - main
   paths:
-      - handlers/**
-      - serverless.yml
-      - package.json
+    - handlers/**
+    - serverless.yml
+    - package.json
 
 jobs:
   deploy:
