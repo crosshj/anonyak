@@ -1,0 +1,22 @@
+<html>
+	<head></head>
+	<style>
+		html { font-size: calc(0.75em + .25vw); }
+		body { color: #ccc; font-family: monospace; margin: 3em;}
+		pre.error { color: #f37; }
+	</style>
+	<body></body>
+	<script type="module">
+		const pre = (className='', x) => `<pre class="${className}">${x}</pre>`
+		try {
+			const apiUrl = 'https://n02d8geryb.execute-api.us-east-1.amazonaws.com/dev/';
+			document.body.innerHTML = pre('',
+				await fetch(apiUrl).then(x => x.text())
+			);
+		} catch(e){
+			document.body.innerHTML = pre('error',
+				e.message + '\n' + e.stack
+			);
+		}
+	</script>
+</html>

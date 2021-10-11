@@ -6,6 +6,11 @@ hello anonyak!
 `;
 	const response = {
 		statusCode: 200,
+		headers: {
+			"Access-Control-Allow-Headers" : "Content-Type",
+			"Access-Control-Allow-Origin": "https://beta.fiug.dev",
+			"Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+		},
 		body,
 		// body: JSON.stringify({
 		// 	message: 'Go Serverless v1.0! Your function executed successfully!',
