@@ -1,9 +1,14 @@
 'use strict';
 
 module.exports.hello = (event, context, callback) => {
-	const body = `
-hello anonyak!
-`;
+	const allowed = [
+		"https://fiug.dev",
+		"https://beta.fiug.dev",
+		"https://crosshj.com",
+	];
+	const origin = '';
+	const AllowOrigin = allowed.includes(origin) ? origin : '';
+	//TODO: use this ^^^
 	const response = {
 		statusCode: 200,
 		headers: {
@@ -11,15 +16,12 @@ hello anonyak!
 			"Access-Control-Allow-Origin": "https://beta.fiug.dev",
 			"Access-Control-Allow-Methods": "OPTIONS,POST,GET"
 		},
-		body,
-		// body: JSON.stringify({
-		// 	message: 'Go Serverless v1.0! Your function executed successfully!',
-		// 	input: event,
-		// }),
+		body: JSON.stringify({
+			message: 'hello anonyak!',
+			event,
+			context,
+		}),
 	};
 
 	callback(null, response);
-
-	// Use this code if you don't use the http event with the LAMBDA-PROXY integration
-	// callback(null, { message: 'Go Serverless v1.0! Your function executed successfully!', event });
 };
