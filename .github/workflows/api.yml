@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-  paths:
-    - "handlers/**"
-    - "serverless.yml"
-    - "package.json"
+    paths:
+      - handlers/**
+      - serverless.yml
+      - package.json
 
 jobs:
   deploy:
