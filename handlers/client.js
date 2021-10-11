@@ -17,7 +17,7 @@ module.exports.post = (event, context, callback) => {
 			"Access-Control-Allow-Methods": "OPTIONS,POST,GET"
 		},
 		body: JSON.stringify({
-			message: 'hello anonyak!',
+			message: 'hello anonyak: client!',
 			event,
 			context,
 		}),
