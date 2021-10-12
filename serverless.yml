@@ -20,7 +20,7 @@ provider:
         - Fn::GetAtt: [ ChatsTable, Arn ]
   environment:
     CHATS_TABLE: ${self:custom.tableName}
-    DB_TTL_HRS: ${self.custom.dbTTLHours}
+    DB_TTL_HRS: ${self:custom.dbTTLHours}
 
 functions:
   hello:
