@@ -25,13 +25,16 @@ module.exports.Dynamo = class Dynamo {
 	async put(message){
 		try {
 			const { client } = this;
+
+			console.log({ message });
+			const id = (Math.random().toString()).slice(2);
+			console.log({ id });
+			const ttl = Math.floor(Date.now() / 1000) + TIME_TO_LIVE;
+			console.log({ ttl });
+
 			const params = {
 				TableName: CHATS_TABLE,
-				Item: {
-					id: (Math.random().toString(32)).slice(2),
-					message: message,
-					ttl: Math.floor(Date.now() / 1000) + TIME_TO_LIVE,
-				},
+				Item: { id, message, ttl },
 			};
 			await client.put(params).promise();
 			return { message };
