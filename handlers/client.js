@@ -2,13 +2,21 @@
 const { Dynamo } = require('../repo/dynamo.js');
 const db = new Dynamo();
 
+const tryParse = (input, defaultOut) => {
+	try {
+		return JSON.parse(input)
+	} catch(e){
+		return defaultOut;
+	}
+}
+
 module.exports.post = async (event, context, callback) => {
 	const allowed = [
 		"https://fiug.dev",
 		"https://beta.fiug.dev",
 		"https://crosshj.com",
 	];
-	const { message } = event.body || {};
+	const { message } = tryParse(event.body, {});
 	const { origin } = event.headers;
 	const AllowOrigin = allowed.includes(origin) ? origin : '';
 

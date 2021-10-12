@@ -27,10 +27,10 @@ module.exports.Dynamo = class Dynamo {
 			const { client } = this;
 
 			console.log({ message });
-			const id = (Math.random().toString()).slice(2);
+			const id = (Math.random().toString(32)).slice(2);
 			console.log({ id });
 			const ttl = Math.floor(Date.now() / 1000) + TIME_TO_LIVE;
-			console.log({ ttl });
+			console.log({ ttl, TIME_TO_LIVE, processTTL: process.env.DB_TTL_HRS });
 
 			const params = {
 				TableName: CHATS_TABLE,
