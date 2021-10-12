@@ -12,27 +12,48 @@
 	<style>
 		html { font-size: calc(0.75em + .25vw); }
 		body,button,pre { font-family: sans-serif; }
-		body { color: #ccc; margin: 3em;}
+		body { color: #ccc; margin: 1em 3em;}
+		body:before {
+			content: 'HOST';
+			position: fixed;
+			right:5px;
+			top: 5px;
+			writing-mode: vertical-lr;
+			direction:ltr;
+			text-orientation: mixed;
+			font-size: 2em;
+			color: #965;
+		}
 		pre.error { color: #f37; }
 	</style>
 
 	<body>
-		<h3>host</h3>
+		<div id="chats"></div>
 	</body>
 
 	<script type="module">
 		const pre = (className='', x) => `<pre class="${className}">${x}</pre>`
-		try {
-			const apiUrl = 'https://n02d8geryb.execute-api.us-east-1.amazonaws.com/dev/host/';
-			const { items, error, event, context } = await fetch(apiUrl).then(x => x.json());
-			if(error) throw new Error(error);
-			console.log({ event, context });
-			document.body.innerHTML += pre('', items);
-		} catch(e){
-			document.body.innerHTML += pre('error',
-				e.message + '\n' + e.stack
-			);
-		}
+		const chatsEl = document.getElementById('chats');
+		const updateChats = async () => {
+			try {
+				const apiUrl = 'https://n02d8geryb.execute-api.us-east-1.amazonaws.com/dev/host/';
+				const { items, error, event, context } = await fetch(apiUrl).then(x => x.json());
+				if(error) throw new Error(error);
+				//console.log({ event, context });
+				chatsEl.innerHTML = pre('',
+					items
+						.sort((a,b)=>a.ttl-b.ttl)
+						.map(x=>x.message)
+						.join('\n')
+				);
+			} catch(e){
+				chatsEl.innerHTML = pre('error',
+					e.message + '\n' + e.stack
+				);
+			}
+		};
+		updateChats();
+		setInterval(updateChats, 10000);
 	</script>
 
 </html>
