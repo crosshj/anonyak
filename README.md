@@ -11,9 +11,14 @@ anonymous chat for team meetings #WIP #POC #MVP
 	- annotate
 	- focus
 	- mind-map
+- [ ] QR Code or link to client from host
+- [ ] unique ID for each hosted session
+- [ ] flesh out this arch pattern
+	- https://joarleymoraes.com/serverless-long-running-http-requests/
+- [ ] mind map tools
 - [X] needs a memory
-	- maybe integrate dynamo
-	- [maybe TTL](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html)
+	- integrate dynamo
+	- [time to live](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html)
 - [X] host needs to poll (or other method to update)
 - [X] client needs to submit some data and save it
 
