@@ -5,6 +5,7 @@ const db = new Dynamo();
 module.exports.get = async (event, context, callback) => {
 	const allowed = [
 		"https://fiug.dev",
+		"https://welcome.fiug.dev"
 		"https://beta.fiug.dev",
 		"https://crosshj.com",
 	];
